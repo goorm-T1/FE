@@ -165,7 +165,7 @@ const UserPage = () => {
   const handlePostRequest = async () => {
     const requestBody = {
       buildingNum: 108,
-      unitNum: 1803,
+      unitNum: 1004,
     };
 
     try {
