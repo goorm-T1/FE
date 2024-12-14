@@ -35,8 +35,8 @@ const CombinedImage = ({
     ],
     faces: [
       "/assets/rockImages/state1.svg",
-      "/assets/rockImages/state1.svg",
-      "/assets/rockImages/state1.svg",
+      "/assets/rockImages/state2.svg",
+      "/assets/rockImages/state3.svg",
     ],
   };
 

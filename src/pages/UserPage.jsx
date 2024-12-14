@@ -85,6 +85,7 @@ const ModalOverlay = styled.div`
   height: 100%;
   top: 0;
   left: 0;
+  z-index: 10;
 `;
 
 const ModalNav = styled.div`
@@ -134,15 +135,30 @@ const RockContainer = styled.div`
   width: 100%;
   height: 200px;
   padding: 0 50px;
+  margin-bottom: 30px;
+`;
+
+const StateContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  > p {
+    font-size: 0.75rem;
+  }
+`;
+
+const StateRadio = styled.div`
+  display: flex;
 `;
 
 const UserPage = () => {
   const { id } = useParams();
   const [msg, setMsg] = useState("");
   const [stoneState, setStoneState] = useState(0);
-  const [stoneColor, setStoneColor] = useState(0);
+  const [stoneColor, setStoneColor] = useState(2);
   const [stoneFace, setStoneFace] = useState(0);
-  const [stoneOutline, setStoneOutline] = useState(0);
+  const [stoneOutline, setStoneOutline] = useState(3);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newMsg, setNewMsg] = useState("");
 
@@ -207,7 +223,7 @@ const UserPage = () => {
   };
 
   useEffect(() => {
-    // handlePostRequest();
+    handlePostRequest();
   }, []);
 
   return (
@@ -219,13 +235,13 @@ const UserPage = () => {
           <h1>{id} 호</h1>
         </Information>
       </LogoContainer>
-      <MessageContainer>
+      <MessageContainer onClick={handleMsgEdit}>
         <Message />
         <div>
           <MessageDetail hasMsg={!!msg}>
             {msg ? msg : "2시부터 3시까지 조용히해주세요"}
           </MessageDetail>
-          <Icons.Edit onClick={handleMsgEdit} />
+          <Icons.Edit />
         </div>
       </MessageContainer>
       <RockContainer>
@@ -236,6 +252,12 @@ const UserPage = () => {
           isFlipped={stoneState}
         />
       </RockContainer>
+      <StateContainer>
+        <p>오늘의 체감 층간소음은 어떤가요?</p>
+        <StateRadio>
+          <div></div>
+        </StateRadio>
+      </StateContainer>
 
       {isModalOpen && (
         <ModalOverlay>
