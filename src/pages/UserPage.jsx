@@ -142,6 +142,7 @@ const StateContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  gap: 1rem;
 
   > p {
     font-size: 0.75rem;
@@ -150,22 +151,41 @@ const StateContainer = styled.div`
 
 const StateRadio = styled.div`
   display: flex;
+  gap: 0.5rem;
+`;
+
+const RadioButton = styled.div`
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  gap: 0.5rem;
+  opacity: ${(props) => (props.isSelected ? 1 : 0.2)};
+  border: 1px solid ${(props) => props.theme.colors.gray1};
+  border-radius: 8px;
+  height: 84px;
+`;
+
+const IconLabel = styled.p`
+  font-weight: ${(props) => props.theme.weight.bold};
 `;
 
 const UserPage = () => {
   const { id } = useParams();
   const [msg, setMsg] = useState("");
   const [stoneState, setStoneState] = useState(0);
-  const [stoneColor, setStoneColor] = useState(2);
+  const [stoneColor, setStoneColor] = useState(0);
   const [stoneFace, setStoneFace] = useState(0);
-  const [stoneOutline, setStoneOutline] = useState(3);
+  const [stoneOutline, setStoneOutline] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newMsg, setNewMsg] = useState("");
 
   const handlePostRequest = async () => {
     const requestBody = {
-      buildingNum: 108,
-      unitNum: 1004,
+      buildingNum: 101,
+      unitNum: id,
     };
 
     try {
@@ -187,15 +207,16 @@ const UserPage = () => {
   };
 
   const handleMsgRequest = async () => {
+    console.log(newMsg);
     const requestBody = {
-      unitNum: 1803,
+      unitNum: id,
       buildingNum: 101,
-      statusMsg: msg,
+      stateMsg: newMsg,
     };
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/mobile/setStageMsg`,
+        `${process.env.REACT_APP_BACKEND_URL}/mobile/setStateMsg`,
         requestBody
       );
       console.log("POST 요청 성공:", response.data);
@@ -216,10 +237,30 @@ const UserPage = () => {
     setIsModalOpen(false);
   };
 
-  const handleModalSave = () => {
+  const handleModalSave = async () => {
     setMsg(newMsg);
     handleMsgRequest();
     setIsModalOpen(false);
+  };
+
+  const handleFaceChange = async (newFace) => {
+    setStoneFace(newFace);
+
+    const requestBody = {
+      buildingNum: 101,
+      unitNum: id,
+      stoneStatus: newFace,
+    };
+
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/mobile/setStoneState`,
+        requestBody
+      );
+      console.log("POST 요청 성공:", response.data);
+    } catch (error) {
+      console.error("Error during POST request:", error);
+    }
   };
 
   useEffect(() => {
@@ -255,7 +296,27 @@ const UserPage = () => {
       <StateContainer>
         <p>오늘의 체감 층간소음은 어떤가요?</p>
         <StateRadio>
-          <div></div>
+          <RadioButton
+            onClick={() => handleFaceChange(1)} // face 값 변경
+            isSelected={stoneFace === 1} // 현재 선택된 상태 확인
+          >
+            <Icons.Good />
+            <IconLabel>만족</IconLabel>
+          </RadioButton>
+          <RadioButton
+            onClick={() => handleFaceChange(0)} // face 값 변경
+            isSelected={stoneFace === 0} // 현재 선택된 상태 확인
+          >
+            <Icons.Normal />
+            <IconLabel>보통</IconLabel>
+          </RadioButton>
+          <RadioButton
+            onClick={() => handleFaceChange(2)} // face 값 변경
+            isSelected={stoneFace === 2} // 현재 선택된 상태 확인
+          >
+            <Icons.Bad />
+            <IconLabel>불만족</IconLabel>
+          </RadioButton>
         </StateRadio>
       </StateContainer>
 

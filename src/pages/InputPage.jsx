@@ -2,6 +2,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { numState } from "../recoil/atom";
 import { useNavigate } from "react-router-dom";
+import Icons from "../assets/icons/icons";
 
 const InputPageContainer = styled.div`
   width: 100%;
@@ -47,6 +48,9 @@ const ImgContainer = styled.div`
   width: 100%;
   height: 327px;
   margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const InputContainer = styled.div`
@@ -123,7 +127,9 @@ const InputPage = () => {
           <h1>구름캐슬 101동</h1>
         </Information>
       </LogoContainer>
-      <ImgContainer></ImgContainer>
+      <ImgContainer>
+        <Icons.MainLogo />
+      </ImgContainer>
       <InputContainer>
         <p>거주 호수</p>
         <InputForm>
