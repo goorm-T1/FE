@@ -32,9 +32,10 @@ const LogoContainer = styled.div`
 
 const NavContainer = styled.div`
   margin: 12px 0;
-  height: 140px;
+  height: 160px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const TitleContainer = styled.div`
@@ -53,11 +54,21 @@ const TitleContainer = styled.div`
   }
 `;
 
+const QRImage = styled.div`
+  width: 120px;
+  height: 130px;
+
+  > svg {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
 const ApartContainer = styled.div`
   width: 70%;
   margin: 0 auto;
   padding: 40px 160px;
-  height: 85%;
+  height: 84%;
   flex: 1;
   background-color: white;
   border: 4px solid ${(props) => props.theme.colors.gray4};
@@ -92,6 +103,7 @@ const MessageContainer = styled.div`
   left: ${(props) => props.index % 2 === 0 || "160px"};
   right: ${(props) => props.index % 2 === 1 || "160px"};
   overflow: visible;
+  font-size: 20px;
 `;
 
 const StateMessage = styled.div`
@@ -156,6 +168,9 @@ const Main = () => {
           <h1>구름캐슬 101동</h1>
           <p>어제의 우리 동 층간소음을 확인해요</p>
         </TitleContainer>
+        <QRImage>
+          <Icons.QRCode />
+        </QRImage>
       </NavContainer>
       <ApartContainer>
         {stateList.map((item, index) => (

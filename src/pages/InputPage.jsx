@@ -7,7 +7,7 @@ import Icons from "../assets/icons/icons";
 const InputPageContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding: 80px 24px 0 24px;
+  padding: 60px 24px 0 24px;
   display: flex;
   flex-direction: column;
   justify-content: top;
@@ -19,13 +19,6 @@ const LogoContainer = styled.div`
   flex-direction: column;
   justify-content: left;
   gap: 0.75rem;
-
-  > p {
-    font-family: ${(props) => props.theme.fonts.secondary};
-    color: ${(props) => props.theme.colors.primary};
-    font-size: 1.75rem;
-    padding: 10px 0;
-  }
 `;
 
 const Information = styled.div`
@@ -121,7 +114,7 @@ const InputPage = () => {
   return (
     <InputPageContainer>
       <LogoContainer>
-        <p>도시락</p>
+        <Icons.MiniLogo />
         <Information>
           <p>소리를 넘어, 마음을 잇다</p>
           <h1>구름캐슬 101동</h1>

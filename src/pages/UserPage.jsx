@@ -10,7 +10,7 @@ const UserPageContainer = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 80px 24px 0 24px;
+  padding: 60px 24px 0 24px;
   display: flex;
   flex-direction: column;
   justify-content: top;
@@ -22,13 +22,6 @@ const LogoContainer = styled.div`
   flex-direction: column;
   justify-content: left;
   gap: 0.75rem;
-
-  > p {
-    font-family: ${(props) => props.theme.fonts.secondary};
-    color: ${(props) => props.theme.colors.primary};
-    font-size: 1.75rem;
-    padding: 10px 0;
-  }
 `;
 
 const Information = styled.div`
@@ -89,7 +82,7 @@ const ModalOverlay = styled.div`
 `;
 
 const ModalNav = styled.div`
-  margin-bottom: 170px;
+  margin-bottom: 150px;
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -196,10 +189,10 @@ const UserPage = () => {
 
       // 개별 상태 업데이트
       const data = response.data;
-      setMsg(data.msg);
-      setStoneState(data.stoneState);
+      setMsg(data.stateMsg);
+      setStoneState(data.stoneFace);
       setStoneColor(data.stoneColor);
-      setStoneFace(data.stoneFace);
+      setStoneFace(data.stoneState);
       setStoneOutline(data.stoneOutline);
     } catch (error) {
       console.error("Error during POST request:", error);
@@ -270,7 +263,7 @@ const UserPage = () => {
   return (
     <UserPageContainer>
       <LogoContainer>
-        <p>도시락</p>
+        <Icons.MiniLogo />
         <Information>
           <p>구름캐슬 101동</p>
           <h1>{id} 호</h1>
