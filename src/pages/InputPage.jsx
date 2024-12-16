@@ -12,6 +12,10 @@ const InputPageContainer = styled.div`
   flex-direction: column;
   justify-content: top;
   font-family: ${(props) => props.theme.fonts.primary};
+  background-image: url("/assets/images/backgroundM.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 `;
 
 const LogoContainer = styled.div`
@@ -64,7 +68,7 @@ const StyledInput = styled.input`
   padding: 0.75rem 1.5rem;
   border: 1px solid
     ${(props) =>
-      props.hasValue ? props.theme.colors.gray1 : props.theme.colors.gray4};
+      props.hasValue ? props.theme.colors.gray1 : props.theme.colors.gray3};
   border-radius: 10px;
   min-width: 234px;
   flex: 1;
@@ -93,7 +97,7 @@ const StyledButton = styled.button`
 
   border-radius: 10px;
   background-color: ${(props) =>
-    props.hasValue ? props.theme.colors.gray1 : props.theme.colors.gray4};
+    props.hasValue ? props.theme.colors.gray1 : props.theme.colors.gray3};
   color: white;
   font-weight: ${(props) => props.theme.weight.semibold};
 `;
@@ -120,9 +124,7 @@ const InputPage = () => {
           <h1>구름캐슬 101동</h1>
         </Information>
       </LogoContainer>
-      <ImgContainer>
-        <Icons.MainLogo />
-      </ImgContainer>
+      <ImgContainer></ImgContainer>
       <InputContainer>
         <p>거주 호수</p>
         <InputForm>
